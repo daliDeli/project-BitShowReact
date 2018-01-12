@@ -19,8 +19,8 @@ Demo: [BitShow](https://dalideli.github.io/project-BitShowReact/)
 - JS(ES6) 
 
 ### Framework: 
--React 
--Bootstrap 
+- React 
+- Bootstrap 
 
 ### Module Loader: 
 - Webpack 
