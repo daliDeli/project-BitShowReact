@@ -13,7 +13,7 @@ Demo: [BitShow](https://dalideli.github.io/project-BitShowReact/)
 
 ## Stack
 
-###Language: 
+### Language: 
 - HTML5
 - CSS3
 - JS(ES6) 
@@ -25,5 +25,5 @@ Demo: [BitShow](https://dalideli.github.io/project-BitShowReact/)
 ### Module Loader: 
 - Webpack 
 
-###Package Manager: 
+### Package Manager: 
 - Yarn
