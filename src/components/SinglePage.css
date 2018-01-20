@@ -1,0 +1,13 @@
+#single-page-image{
+    width: 40%;
+    height: 100%;
+}
+
+.card{
+    width: 20rem;
+}
+
+#actor-picture{
+    min-height: 10em;
+    max-height: 15em;
+}
