@@ -60,8 +60,8 @@ export default class Header extends Component {
                
                 </nav>
                 <ul className="list-group container-fluid" style={{ display: this.state.display, position: "absolute", top: 67, zIndex: 2 }}>
-                    {this.state.seriesData.data.map(series =>
-                        <li className="list-group-item " key={series.show.id} onClick={this.toggleStateDisplay}>
+                    {this.state.seriesData.data.map((series,i) =>
+                        <li className="list-group-item " key={i} onClick={this.toggleStateDisplay}>
                             <Link to={`/single/${series.show.id}`}> {series.show.name} </Link>
                         </li>)}
                 </ul>
