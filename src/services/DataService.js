@@ -10,18 +10,24 @@ export default class DataService {
     getAllSeries(success, failure) {
         this.fetchService.getAll(
             seriesData => {
-                console.log("dataservice", seriesData);
-                const series = seriesData.data.map(show => new Series(show));
-                success(series);
+                // const series = seriesData.data.map(show => new Series(show));
+                
+                success(seriesData.data);
             },
-            error => failure(error)
+            error =>{
+            console.log("error")            
+                failure(error)
+
+            } 
         );
     }
 
     getOneSeries(id, success, failure) {
         this.fetchService.getOne(id,
-            seriesData => success(seriesData)
-            ,
+            seriesData => {
+                const series = new Series(seriesData.data);
+                success(series);
+            },
             error => failure(error)
         )
     }

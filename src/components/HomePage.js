@@ -25,17 +25,17 @@ export default class HomePage extends Component {
     }
 
     successSeriesHandler(series) {
-        console.log("primio", series);
         this.setState({
             series
         })
     }
-
+    
     componentDidMount() {
         this.getSeries();
     }
-
+    
     failedRequest(error) {
+        
         console.log(error)
     }
 
@@ -47,7 +47,7 @@ export default class HomePage extends Component {
 
                         {this.state.series.map(series =>
                             <Link to={`/single/${series.id}`} className="col-12 col-md-6 col-lg-4 text-center top-buffer" key={series.id}>
-                                <ShowCard image={series.image} name={series.name} key={series.id} />
+                                <ShowCard image={series.image.medium} name={series.name} key={series.id} />
                             </Link>
                         )}
                     </div>

@@ -1,10 +1,10 @@
-#single-page-image{
-    width: 40%;
+#single-show-image{
     height: 100%;
+    width:  51%;
 }
 
 .card{
-    width: 20rem;
+    width: 26rem;
 }
 
 #actor-picture{

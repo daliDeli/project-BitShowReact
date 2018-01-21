@@ -3,3 +3,7 @@
     font-family: 'Bungee', cursive;
     color: #324355;
 }
+
+.card{
+    width: 100%!important;
+}
