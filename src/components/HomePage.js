@@ -35,7 +35,7 @@ export default class HomePage extends Component {
     }
     
     failedRequest(error) {
-        console.log("tada");
+        
         console.log(error)
     }
 
