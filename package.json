@@ -4,7 +4,6 @@
   "private": true,
   "dependencies": {
     "axios": "^0.17.1",
-    "eslint": "^4.12.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
     "react-router-dom": "^4.2.2",
@@ -15,7 +14,12 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
-    "deploy" : "yarn run build&&gh-pages -d build"
+    "deploy": "yarn run build&&gh-pages -d build"
   },
-  "homepage": "https://dalideli.github.io/project-BitShowReact"
+  "homepage": "https://dalideli.github.io/project-BitShowReact",
+  "devDependencies": {
+    "gulp": "^3.9.1",
+    "gulp-sass": "^4.0.1",
+    "eslint": "^4.19.1"
+  }
 }

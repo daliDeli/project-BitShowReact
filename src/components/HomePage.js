@@ -1,10 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-
 import DataService from "../services/DataService";
 import ShowCard from "./ShowCard";
-import "./HomePage.css";
-
 
 export default class HomePage extends Component {
     constructor() {
