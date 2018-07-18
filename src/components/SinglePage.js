@@ -116,22 +116,18 @@ export default class SinglePage extends Component {
                                     <div className="card-body">
 
                                         {this.state.series.cast.map((actor, i) => {
-                    
-                                            if (i < 5) {
 
-                                                let actorImg = actor.person.image.medium || "http://via.placeholder.com/150x150";
-
-                                                return (<div className="row" key={actor.person.id}>
+                                           return i < 5 && (
+                                                <div className="row" key={actor.person.id}>
                                                     <div className="col-12 ">
-                                                        <img id="actor-picture" className="img-thumbnail" src={actorImg} alt="Actor/actress " />
+                                                        <img id="actor-picture" className="img-thumbnail" src={actor.person.image.medium || "http://via.placeholder.com/150x150"} alt="Actor/actress " />
                                                     </div>
                                                     <div className="col-12 text-center">
                                                         <h4>{actor.person.name} </h4>
                                                     </div>
-                                                </div>)
-                                            }
-                                        }
-                                        )}
+                                                </div>
+                                            )
+                                        })}
 
                                     </div>
                                 </div>

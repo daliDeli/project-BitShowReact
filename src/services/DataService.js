@@ -15,7 +15,7 @@ export default class DataService {
                 success(seriesData.data);
             },
             error =>{
-            console.log("error")            
+            console.log(error.message)            
                 failure(error)
 
             } 
@@ -28,7 +28,7 @@ export default class DataService {
                 const series = new Series(seriesData.data);
                 success(series);
             },
-            error => failure(error)
+            error => failure(error.message)
         )
     }
 
@@ -36,7 +36,7 @@ export default class DataService {
         this.fetchService.getByName(seriesName,
             seriesData=> success(seriesData)
             ,
-            error=> failure(error)
+            error=> failure(error.message)
         )
     }
 }
