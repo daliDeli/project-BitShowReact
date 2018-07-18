@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import DataService from "../services/DataService";
 
-import "./SinglePage.css";
-
 export default class SinglePage extends Component {
     constructor(props) {
         super(props);
