@@ -2,9 +2,6 @@
   height: 100%;
   width: 51%; }
 
-.card {
-  width: 26rem; }
-
 #actor-picture {
   min-height: 10em;
   max-height: 15em; }
@@ -12,11 +9,11 @@
 nav {
   background: #D36135; }
   nav #bitshow {
-    font-family: 'Bungee', cursive; }
+    font-family: "Bungee", cursive; }
 
 .top-buffer {
   margin-top: 15px;
-  font-family: 'Bungee', cursive;
+  font-family: "Bungee", cursive;
   color: #324355; }
 
 body {
