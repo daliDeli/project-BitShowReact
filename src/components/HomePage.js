@@ -6,32 +6,25 @@ import { ShowCard } from "./ShowCard";
 export default class HomePage extends Component {
     constructor() {
         super();
+
         this.state = {
             series: []
         }
-
-        this.getSeries = this.getSeries.bind(this);
-        this.successSeriesHandler = this.successSeriesHandler.bind(this);
-
     }
 
     getSeries() {
-        getAllSeries(this.successSeriesHandler, this.failedRequest);
-    }
-
-    successSeriesHandler(series) {
-        this.setState({
-            series
-        })
+        getAllSeries(
+            series => {
+                this.setState({ series });
+            }, 
+            error => {
+                console.log(error);
+            }
+        );
     }
     
     componentDidMount() {
         this.getSeries();
-    }
-    
-    failedRequest(error) {
-        
-        console.log(error)
     }
 
     render() {
@@ -41,7 +34,7 @@ export default class HomePage extends Component {
                     <div className="row">
 
                         {this.state.series.map(series =>
-                            <Link to={`/single/${series.id}`} className="col-12 col-md-6 col-lg-4 text-center top-buffer" key={series.id}>
+                            <Link to={`/single/${series.id}`} className="col-12 col-md-4 col-lg-3 text-center top-buffer" key={series.id}>
                                 <ShowCard image={series.image.medium} name={series.name} key={series.id} />
                             </Link>
                         )}

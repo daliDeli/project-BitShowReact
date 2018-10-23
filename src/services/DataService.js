@@ -7,8 +7,7 @@ export const getAllSeries = (success, failure) =>{
             success(seriesData.data);
         },
         error =>{        
-            failure(error)
-
+            failure(error);
         } 
     );
 }
@@ -19,14 +18,20 @@ export const getOneSeries = (id, success, failure) => {
             const series = new Series(seriesData.data);
             success(series);
         },
-        error => failure(error.message)
+        error => {
+            failure(error.message);
+        }
     )
 }
 
 export const getSeriesByName = (seriesName, success, failure) => {
     getByName(seriesName,
-        seriesData=> success(seriesData)
+        seriesData=> {
+            success(seriesData);
+        }
         ,
-        error=> failure(error)
+        error=> {
+            failure(error);
+        }
     )
 }

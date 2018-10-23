@@ -4,9 +4,9 @@ export default class Footer extends Component{
     
         render(){
             return(
-                <footer className="text-center ">
-                <p>Copyright © {new Date().getFullYear()}</p>
-              </footer>
+                <footer id="footer">
+                    <p>Copyright © {new Date().getFullYear()}</p>
+                </footer>
             );
         }
     }

@@ -1,5 +1,5 @@
-import React, {Component} from "react";
-
+import React, { Component } from "react";
+import { Link } from "react-router-dom";
 import { getSeriesByName } from "../services/dataService";
 
 export default class Search extends Component{
@@ -7,39 +7,60 @@ export default class Search extends Component{
         super();
 
         this.state={
-            searchString:"",
-            
+            seriesData: {
+                data: [{
+                    show: {}
+                }]
+            },
+            searchString: "",
         }
-
-        // this.searchedString = this.searchedString.bind(this);
-        // this.successHandler = this.successHandler.bind(this);
-        // this.errorHandler = this.errorHandler.bind(this);
     }
 
-    searchedString = (event) => {
+    searchedString = event => {
         const searchString = event.target.value;
 
         this.setState({
             searchString
         })
 
-        getSeriesByName(searchString, this.successHandler, this.errorHandler);
-
-        this.props.passingSearchedString(this.state.searchString);
+        getSeriesByName(
+            searchString,
+            seriesData => { this.setState({ seriesData }); },
+            error => {
+                console.warn(error);
+            }
+        );
     }
 
-    successHandler = (seriesData) => {   
-            this.props.passingSeriesData(seriesData);
-    }
-    
-    errorHandler(error){
-        console.warn(error);
+    emptySearchedString = () => {
+        this.setState({
+            searchString: ""
+        })
     }
 
     render(){
         return(
-            
-            <input className="form-control mr-sm-2 " onChange={this.searchedString} value={this.state.searchString} type="search" placeholder="Search" aria-label="Search"/>
+            <div>
+                <input 
+                className="form-control mr-sm-2 " 
+                onChange={this.searchedString} 
+                value={this.state.searchString} 
+                type="search" 
+                placeholder="Search" 
+                aria-label="Search"
+                />
+                { this.state.searchString && 
+                <ul className="list-group">
+                    {this.state.seriesData.data.map((series,i) =>
+                            <li className="list-group-item " key={i} onClick={this.emptySearchedString}>
+                                <Link to={`/single/${series.show.id}`}>
+                                    {series.show.name}
+                                </Link>
+                            </li>
+                        )
+                    }
+                </ul>}
+            </div>
         )
     }
 }

@@ -1,8 +1,19 @@
-@import './variables.scss';
+@import './_variables.scss';
 @import './_single-page.scss';
-@import './_header.scss';
 @import './_home-page.scss';
+@import './_header.scss';
+@import './_footer.scss';
 
-body{
-    background: $mainColor;
+html{
+    height: 100%;
+    body{
+        min-height: 100%; 
+        position: relative; 
+        padding-bottom: 30px; 
+        background: $mainColor;
+    }
 }
+
+
+
+

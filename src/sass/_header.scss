@@ -1,7 +1,10 @@
 nav{
+    background: $secondaryColor;
     #bitshow{
         font-family: $bungeeFont;
     }
-    background: $secondaryColor;
   }
-  
+.list-group{
+    position: absolute;
+    z-index: 2;
+}
