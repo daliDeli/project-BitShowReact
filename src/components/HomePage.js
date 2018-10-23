@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Link } from "react-router-dom";
-import DataService from "../services/DataService";
-import ShowCard from "./ShowCard";
+import { getAllSeries } from "../services/dataService";
+import { ShowCard } from "./ShowCard";
 
 export default class HomePage extends Component {
     constructor() {
@@ -10,15 +10,13 @@ export default class HomePage extends Component {
             series: []
         }
 
-        this.dataService = new DataService();
-
         this.getSeries = this.getSeries.bind(this);
         this.successSeriesHandler = this.successSeriesHandler.bind(this);
 
     }
 
     getSeries() {
-        this.dataService.getAllSeries(this.successSeriesHandler, this.failedRequest);
+        getAllSeries(this.successSeriesHandler, this.failedRequest);
     }
 
     successSeriesHandler(series) {

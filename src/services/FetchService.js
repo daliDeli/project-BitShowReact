@@ -1,46 +1,29 @@
 import axios from "axios";
-
 import { BASE_URL } from "../constants";
 
-export default class FetchService {
+// axios.defaults.baseURL = BASE_URL;
 
-    getAll(successHandler, errorHandler) {
-        axios({
-            url: `${BASE_URL}shows`,
-            method: "get",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => successHandler(response))
-            .catch(error => errorHandler(error));
-    }
-
-    getOne(id, successHandler, errorHandler) {
-        axios({
-            url: `${BASE_URL}shows/${id}`,
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            },
-            params: {
-                embed: ['seasons', 'cast']
-            }
-
-        })
-            .then(response => successHandler(response))
-            .catch(error => errorHandler(error));
-    }
-    
-    getByName(seriesName, successHandler, errorHandler) {
-        axios({
-            url: `${BASE_URL}/search/shows?q=${seriesName}`,
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        })
-            .then(response => successHandler(response))
-            .catch(error => errorHandler(error));
-    }
+export const getAll = (successHandler, errorHandler) => {
+    axios.get( `${BASE_URL}shows`)
+        .then(response => successHandler(response))
+        .catch(error => errorHandler(error));
 }
+
+export const getOne = (id, successHandler, errorHandler) => {
+    axios.get(`${BASE_URL}shows/${id}`,
+            {
+                params: {
+                    embed: ['seasons', 'cast']
+            }
+        }
+    )
+        .then(response => successHandler(response))
+        .catch(error => errorHandler(error));
+}
+
+export const getByName = (seriesName, successHandler, errorHandler) => {
+    axios.get(`${BASE_URL}/search/shows?q=${seriesName}`)
+        .then(response => successHandler(response))
+        .catch(error => errorHandler(error));
+}
+

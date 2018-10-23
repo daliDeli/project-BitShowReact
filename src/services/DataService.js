@@ -1,42 +1,32 @@
-import FetchService from "./FetchService";
 import Series from "../entities/Series";
+import { getAll, getOne, getByName} from "../services/fetchService";
 
-export default class DataService {
-    constructor() {
+export const getAllSeries = (success, failure) =>{
+    getAll(
+        seriesData => {
+            success(seriesData.data);
+        },
+        error =>{        
+            failure(error)
 
-        this.fetchService = new FetchService();
-    }
+        } 
+    );
+}
 
-    getAllSeries(success, failure) {
-        this.fetchService.getAll(
-            seriesData => {
-                // const series = seriesData.data.map(show => new Series(show));
-                
-                success(seriesData.data);
-            },
-            error =>{
-            console.log(error.message)            
-                failure(error)
+export const getOneSeries = (id, success, failure) => {
+    getOne(id,
+        seriesData => {
+            const series = new Series(seriesData.data);
+            success(series);
+        },
+        error => failure(error.message)
+    )
+}
 
-            } 
-        );
-    }
-
-    getOneSeries(id, success, failure) {
-        this.fetchService.getOne(id,
-            seriesData => {
-                const series = new Series(seriesData.data);
-                success(series);
-            },
-            error => failure(error.message)
-        )
-    }
-
-    getSeriesByName(seriesName, success, failure) {
-        this.fetchService.getByName(seriesName,
-            seriesData=> success(seriesData)
-            ,
-            error=> failure(error.message)
-        )
-    }
+export const getSeriesByName = (seriesName, success, failure) => {
+    getByName(seriesName,
+        seriesData=> success(seriesData)
+        ,
+        error=> failure(error)
+    )
 }

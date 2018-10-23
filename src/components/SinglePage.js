@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import DataService from "../services/DataService";
+import { getOneSeries } from "../services/dataService";
 
 export default class SinglePage extends Component {
     constructor(props) {
@@ -7,42 +7,25 @@ export default class SinglePage extends Component {
 
         this.state = {
             series: null
-
         }
-        this.dataService = new DataService();
-
-        this.bindHandlers();
-    }
-    bindHandlers() {
-        this.fetchOneSeries = this.fetchOneSeries.bind(this);
-        this.successHandler = this.successHandler.bind(this);
-        this.fetchSeriesThatIsSearched = this.fetchSeriesThatIsSearched.bind(this);
-
     }
 
-    fetchOneSeries() {
-        const seriesId = this.props.match.params.id;
-        this.dataService.getOneSeries(seriesId, this.successHandler, this.errorHandler);
-
-    }
-
-    fetchSeriesThatIsSearched(seriesId) {
-        this.dataService.getOneSeries(seriesId, this.successHandler, this.errorHandler);
-
+    fetchOneSeries(seriesId = this.props.match.params.id) {
+        getOneSeries(
+            seriesId,
+            series => { this.setState({ series }) },
+            (error) => { console.warn('greska',error) }
+        );
     }
 
     errorHandler(error) {
-        console.warn(error);
+        console.warn('greska',error);
     }
 
-    successHandler(series) {
-        this.setState({
-            series
-        })
-    }
-
-    componentWillReceiveProps(nextProps) {
-        this.fetchSeriesThatIsSearched(nextProps.match.params.id);
+    componentDidUpdate(prevProps) {
+        if(prevProps !== this.props) {
+            this.fetchOneSeries();
+        }
     }
 
     componentDidMount() {
@@ -53,7 +36,7 @@ export default class SinglePage extends Component {
 
         if (this.state.series === null) {
             return (
-                <p>Loading...</p>
+                <h2>Loading...</h2>
             )
         }
         return (
@@ -67,10 +50,8 @@ export default class SinglePage extends Component {
                             <img id="single-show-image" src={this.state.series.imageOriginal} alt="Show cover" />
                         </div>
                     </div>
-
-                    <div className="row">
                         <div id="accordion" className="text-center row" role="tablist">
-                            <div className="card col-12 col-sm-12 col-md-4 offset-md-4 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
+                            <div className="card col-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
                                 <div className="card-header" role="tab" id="headingOne">
                                     <h5 className="mb-0">
                                         <a data-toggle="collapse" href="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
@@ -85,7 +66,7 @@ export default class SinglePage extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="card col-12 col-sm-12 col-md-4 offset-md-4 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
+                            <div className="card col-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
                                 <div className="card-header" role="tab" id="headingTwo">
                                     <h5 className="mb-0">
                                         <a className="collapsed" data-toggle="collapse" href="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
@@ -103,7 +84,7 @@ export default class SinglePage extends Component {
                                     </div>
                                 </div>
                             </div>
-                            <div className="card col-12 col-sm-12 col-md-4 offset-md-4 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
+                            <div className="card col-12 col-sm-12 col-md-6 offset-md-3 col-lg-6 offset-lg-3 col-xl-6 offset-xl-3">
                                 <div className="card-header" role="tab" id="headingThree">
                                     <h5 className="mb-0">
                                         <a className="collapsed" data-toggle="collapse" href="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
@@ -120,7 +101,7 @@ export default class SinglePage extends Component {
                                            return i < 5 && (
                                                 <div className="row" key={actor.person.id}>
                                                     <div className="col-12 ">
-                                                        <img id="actor-picture" className="img-thumbnail" src={actor.person.image.medium || "http://via.placeholder.com/150x150"} alt="Actor/actress " />
+                                                        <img id="actor-picture" className="img-thumbnail" src={actor.person.image ? actor.person.image.medium : "http://via.placeholder.com/150x150"} alt="Actor/actress " />
                                                     </div>
                                                     <div className="col-12 text-center">
                                                         <h4>{actor.person.name} </h4>
@@ -134,8 +115,6 @@ export default class SinglePage extends Component {
                             </div>
                         </div>
                     </div>
-                </div>
-
 
             </main>
         );

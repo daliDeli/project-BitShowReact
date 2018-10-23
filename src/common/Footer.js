@@ -5,7 +5,7 @@ export default class Footer extends Component{
         render(){
             return(
                 <footer className="text-center ">
-                <p>Copyright © 2017 BIT</p>
+                <p>Copyright © {new Date().getFullYear()}</p>
               </footer>
             );
         }

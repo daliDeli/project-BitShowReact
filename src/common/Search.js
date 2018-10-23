@@ -1,6 +1,6 @@
 import React, {Component} from "react";
 
-import DataService from "../services/DataService";
+import { getSeriesByName } from "../services/dataService";
 
 export default class Search extends Component{
     constructor(){
@@ -10,28 +10,26 @@ export default class Search extends Component{
             searchString:"",
             
         }
-        this.dataService = new DataService();
 
-        this.searchedString = this.searchedString.bind(this);
-        this.successHandler = this.successHandler.bind(this);
-        this.errorHandler = this.errorHandler.bind(this);
+        // this.searchedString = this.searchedString.bind(this);
+        // this.successHandler = this.successHandler.bind(this);
+        // this.errorHandler = this.errorHandler.bind(this);
     }
 
-    searchedString(event){
+    searchedString = (event) => {
         const searchString = event.target.value;
 
         this.setState({
             searchString
         })
 
-        this.dataService.getSeriesByName(searchString, this.successHandler, this.errorHandler);
+        getSeriesByName(searchString, this.successHandler, this.errorHandler);
 
         this.props.passingSearchedString(this.state.searchString);
     }
 
-    successHandler(seriesData){   
+    successHandler = (seriesData) => {   
             this.props.passingSeriesData(seriesData);
-
     }
     
     errorHandler(error){
